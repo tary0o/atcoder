@@ -1,16 +1,14 @@
-N,A,B = map(int,input().split())
+import sys
+input = sys.stdin.readline
 
-ans = [ ['.'*(B*N)] for _ in range(A*N)]
-white = [ ['.'*(B)] for _ in range(A)]
-black =  [ ['#'*(B)] for _ in range(A)]
+def main():
+    n = int(input())
+    a = list(map(int,input().split()))
+    a.sort()
 
-for i in range(1,N+1):
-    if i%2 == 1:
-        print(0)
-        ans[(i-1)*A:i*A][(i-1)*B:i*B] = white
-    else:
-        print(1)
-        ans[(i-1)*A:i*A][(i-1)*B:i*B] = black      
+    print(a[0],a[n-1])
+    print(''.join(map(str, a)))
 
-for i in range(A*N):
-    print(*ans[i][:])
+
+if __name__ == '__main__':
+    main()
