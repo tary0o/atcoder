@@ -1,24 +1,30 @@
-import sys
-input = sys.stdin.readline
- 
 N = int(input())
-S = [0]*(2*10**5+1)
- 
+L,R = [],[]
 for i in range(N):
-    L,R = map(int,input().split())
-    S[L:R] = [1]*(R-L)
- 
-l = 0
-ans = []
-ansl,ansr = [],[]
-for i in range(1,2*10**5+1):
-    if S[i]==1 and l==0:
-        ansl = i
-        l = 1
-    if S[i]==0 and l==1:
-        ansr = i
-        l = 0
-        ans.append([ansl,ansr])
- 
-for a in ans:
-    print(a[0],a[1])
+    Li,Ri = map(int,input().split())
+    L.append(Li)
+    R.append(Ri)
+L.sort()
+R.sort()
+indexL,indexR = 0,0
+cnt = 0
+ansL,ansR=[],[]
+
+while True:
+    if indexL == N:
+        ansR.append(R[-1])
+        break
+    else:
+        if L[indexL] <= R[indexR]:
+            if cnt == 0:
+                ansL.append(L[indexL])
+            cnt += 1
+            indexL += 1
+        else:
+            cnt -= 1
+            if cnt == 0:
+                ansR.append(R[indexR])
+            indexR += 1
+
+for i in range(len(ansL)):
+    print(ansL[i],ansR[i])
