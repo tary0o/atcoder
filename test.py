@@ -1,7 +1,10 @@
-S = list(range(10))
-N =10
-x = 3
-newS = S[N-x:N]
-newS.reverse()
-newS = newS + S[0:N-x]
-print(newS)
+S = list(input())
+
+for i in range(2,len(S),2):
+    S = S[:-2]
+    s1 = S[:len(S)//2]
+    s2 = S[len(S)//2:]
+
+    if s1 == s2:
+        print(len(S))
+        break
