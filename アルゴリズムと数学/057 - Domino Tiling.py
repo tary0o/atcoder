@@ -2,7 +2,6 @@ mod = int(1e9+7)
 
 def multiply(A,B):
 	n = len(A)
-	print(n)
 	C = [[0]*n for _ in range(n)]
 	for i in range(n):
 		for j in range(n):
@@ -14,7 +13,7 @@ def multiply(A,B):
 K,N = map(int,input().split())
 
 if K==2:
-    mat = [[1,0,0,0],[0,0,0,0],[0,0,0,0],[1,0,0,1]]
+    mat = [[0,0,0,1],[0,0,0,0],[0,0,0,0],[1,0,0,1]]
 if K==3:
     mat = [
     [0,0,0,0,0,0,0,1],
@@ -46,6 +45,13 @@ if K==4:
         [1,0,0,1,0,0,1,0,0,0,0,0,1,0,0,1],
     ]
 
+ans = [[0]*(2**K) for _ in range(2**K)]
+for i in range(2**K):
+    ans[i][i] = 1
 
 for i in range(60):
-    
+    if N&(1<<i):
+        ans = multiply(mat,ans)
+    mat = multiply(mat,mat)
+
+print(ans[-1][-1])
