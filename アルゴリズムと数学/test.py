@@ -1,15 +1,20 @@
-def multiply(A,B):
-	n = len(A)
-	print(n)
-	C = [[0]*n for _ in range(n)]
-	for i in range(n):
-		for j in range(n):
-			for k in range(n):
-				C[i][j] += A[i][k]*B[k][j]
-	return C
+import math
+# 入力
+N, K = map(int, input().split())
+V = list(map(int, input().split()))
 
-A = [[1,1,1],[2,0,1],[2,1,1]]
-B = [[2,2,1],[3,0,1],[1,1,1]]
-C = multiply(A,B)
-
-print(C)
+# ビット全探索
+Answer = 0
+for i in range(1, 1 << K):
+	cnt = -1
+	lcm = 1
+	for j in range(K):
+		if (i & (1 << j)) != 0:
+			cnt *= -1
+			lcm = (lcm*V[j])//math.gcd(lcm,V[j])
+			
+	# num は N 以下の中で選ばれたすべての倍数であるものの個数
+	num = N // lcm
+	Answer += cnt*(num)
+# 出力
+print(Answer)
