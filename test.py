@@ -1,10 +1,4 @@
-S = list(input())
-
-for i in range(2,len(S),2):
-    S = S[:-2]
-    s1 = S[:len(S)//2]
-    s2 = S[len(S)//2:]
-
-    if s1 == s2:
-        print(len(S))
-        break
+N = 6
+for i in range(N-1):
+    for j in range(i+1,N):
+        print(i,j)
